@@ -14,8 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from rest_framework import routers
+from rest_framework.authtoken import views as tviews
+from rest_auth import views
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+
+router = routers.DefaultRouter()
+router.register(r'users', views.UserViewSet)
+router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', include(router.urls)),
+    # url below allows logging in using the browsable api
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('rest-api/', include('rest_registration.api.urls')),
+    path('rest-api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('rest-api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
