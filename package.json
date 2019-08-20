@@ -1,0 +1,35 @@
+{
+  "name": "iot_dashboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development ./i_ot/fend/src/index.js --output ./i_ot/fend/static/fend/main.js",
+    "build": "webpack --mode production ./i_ot/fend/src/index.js --output ./i_ot/fend/static/fend/main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RonKbS/iot_dashboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RonKbS/iot_dashboard/issues"
+  },
+  "homepage": "https://github.com/RonKbS/iot_dashboard#readme",
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  }
+}
