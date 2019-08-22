@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 import { signIn } from '../actions/auth';
 
@@ -9,13 +9,17 @@ export class Signin extends Component {
     state = {
         username: '',
         password: '',
+        redirect: false
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-      console.log('next', nextProps)
-      if (nextProps.isLoggedIn === true) {
-        return <Redirect to="/" />;
+    static getDerivedStateFromProps(props, state) {
+      if (props.isLoggedIn === true) {
+        return {
+          ...state,
+          redirect: true
+        }
       }
+      return null;
     }
 
     onSubmit = e => {
@@ -32,8 +36,7 @@ export class Signin extends Component {
     onChange = e => this.setState({ [e.target.name]: e.target.value })
 
     render() {
-      console.log(this.props.isLoggedIn)
-        if (this.props.isLoggedIn) {
+        if (this.state.redirect) {
           return <Redirect to="/" />;
         }
         const { username, password } = this.state;
@@ -79,7 +82,7 @@ export class Signin extends Component {
 
 
 const mapStateToProps = state => ({
-  isLoggedIn: state.isLoggedIn,
+  isLoggedIn: state.auth.isLoggedIn
 })
 
 

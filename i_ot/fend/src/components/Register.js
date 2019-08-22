@@ -1,26 +1,50 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+
+import { register } from '../actions/auth';
 
 export class Register extends Component {
     state = {
         username: '',
         email: '',
         password: '',
-        password2: ''
+        password2: '',
+        redirect: false
+    }
+
+    static getDerivedStateFromProps(props, state) {
+      if (props.isRegistered === true) {
+        return {
+          ...state,
+          redirect: true
+        }
+      }
+      return null;
     }
 
     onSubmit = e => {
         e.preventDefault();
-        console.log('submit')
+        const { 
+          username, email,
+          password, password2
+         } = this.state;
+        const payload = {
+          username,
+          email,
+          password,
+          password_confirm: password2
+        };
+        const { dispatch } = this.props;
+        dispatch(register(payload));
     }
 
     onChange = e => this.setState({ [e.target.name]: e.target.value })
 
     render() {
-        // if (this.props.isAuthenticated) {
-        //   return <Redirect to="/" />;
-        // }
+        if (this.state.redirect) {
+          return <Redirect to="/signin" />;
+        }
         const { username, email, password, password2 } = this.state;
         return (
           <div className="col-md-6 m-auto">
@@ -83,10 +107,9 @@ export class Register extends Component {
 }
 
 
-// const mapStateToProps = state => ({
-//   isLoggedIn: state.user.isLoggedIn,
-// })
+const mapStateToProps = state => ({
+  isRegistered: state.auth.isRegistered,
+})
 
 
-
-export default connect()(Register);
+export default connect(mapStateToProps)(Register);
