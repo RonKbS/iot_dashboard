@@ -11,7 +11,6 @@ export const getGraphData = () => dispatch => {
     .get('ts-api/')
     .then((response) => {
       dispatch({ type: GET_GRAPH_DATA_SUCCESS, payload: response.data });
-      // console.log("response", response.data.join(null))
     });
 };
 

@@ -25,36 +25,33 @@ export class Dashboard extends Component {
     dispatch(getGraphData());
   }
 
-
   render() {
     const { data } = this.state;
-    let initialColumnValue = 0
+    let initialColumnValue = 0;
     if (data && data.channel && data.feeds) {
       let m = data.feeds.map(field => parseInt(field.field1));
       let n = data.feeds.map(field => parseInt(field.field2));
       let o = data.feeds.map(
-        field => initialColumnValue += new Date(field.created_at).getSeconds()
+        field => (initialColumnValue += new Date(field.created_at).getSeconds())
       );
       const chart = {
-        x: 'x',
+        x: "x",
+        title: data.channel.description,
         columns: [
-          ['x', ...o],
+          ["x", ...o],
           ['"Light"', ...m],
           ['"Outside Temperature"', ...n]
-        ],
-        size: {
-          height: 50,
-          width: 240
-        },
+        ]
       };
       return (
         <Fragment>
           <div className="container">
-          <NavBar />
+            <NavBar />
           </div>
           <div>
             <div
-               id="chart" className="cotainer"
+              id="chart"
+              className="cotainer"
             >
               <C3Chart data={chart} />
             </div>
