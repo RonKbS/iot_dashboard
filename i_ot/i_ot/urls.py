@@ -32,4 +32,5 @@ urlpatterns = [
     path('rest-api/', include('rest_registration.api.urls')),
     path('rest-api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('rest-api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('ts-api/', include('thingspeak.urls')),
 ]

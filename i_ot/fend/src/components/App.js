@@ -6,7 +6,8 @@ import { ToastContainer } from 'react-toastify';
 import Header from "./layout/Header";
 import Signin from "./SignIn";
 import Register from "./Register";
-// import PrivateRoute from "../components/utilities";
+import Dashboard from "./Dashboard";
+import PrivateRoute from "../components/utilities/PrivateRoute";
 
 import { Provider } from "react-redux";
 import store from "../store";
@@ -20,6 +21,7 @@ class App extends Component {
               <Route exact path="/" component={Header} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/signin" component={Signin} />
+              <PrivateRoute exact path="/dashboard" component={Dashboard} />
           </Switch>
         </Router>
       </Provider>

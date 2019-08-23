@@ -37,7 +37,6 @@ export const signIn = payload => dispatch => {
 
 // REGISTER
 export const register = (payload) => dispatch => {
-  console.log(payload)
   axios
     .post('/rest-api/register/', payload)
     .then(() => {

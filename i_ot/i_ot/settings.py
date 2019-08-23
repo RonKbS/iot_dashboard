@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'rest_registration',
     'fend',
+    'thingspeak',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,18 @@ REST_REGISTRATION = {
     'RESET_PASSWORD_VERIFICATION_URL': False,
     'REGISTER_EMAIL_VERIFICATION_ENABLED': False,
 }
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": config('REDIS_URL'),
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient"
+        },
+        "KEY_PREFIX": "i_ot"
+    }
+}
+
+
+# Cache time to live is 5 minutes.
+CACHE_TTL = 60 * 5
