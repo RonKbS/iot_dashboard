@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import getGraphData from "../actions/iot";
 import C3Chart from "react-c3js";
 
+import NavBar from "./NavBar";
 
 export class Dashboard extends Component {
   state = {
@@ -41,13 +42,24 @@ export class Dashboard extends Component {
           ['"Light"', ...m],
           ['"Outside Temperature"', ...n]
         ],
+        size: {
+          height: 50,
+          width: 240
+        },
       };
       return (
-        <div>
-          <div id="chart">
-            <C3Chart data={chart} />
+        <Fragment>
+          <div className="container">
+          <NavBar />
           </div>
-        </div>
+          <div>
+            <div
+               id="chart" className="cotainer"
+            >
+              <C3Chart data={chart} />
+            </div>
+          </div>
+        </Fragment>
       );
     }
     return (
